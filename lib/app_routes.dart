@@ -8,7 +8,7 @@ const kHomeRoute = '/home';
 const kHistoryRoute = '/History';
 
 final Map<String, WidgetBuilder> kRoutes = {
-  kMainRoute: (_) => SplashScreen(),
-  kHomeRoute: (_) => HomeScreen(),
-  kHistoryRoute: (_) => NoteScreen(),
+  kMainRoute: (_) => const SplashScreen(),
+  kHomeRoute: (_) => const HomeScreen(),
+  kHistoryRoute: (_) => const NoteScreen(),
 };
