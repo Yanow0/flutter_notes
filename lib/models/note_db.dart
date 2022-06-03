@@ -4,7 +4,7 @@ import 'note.dart';
 
 class NotesDatabase {
   static const _name = "NotesDatabase.db";
-  static const _version = 1;
+  static const _version = 2;
   late Database database;
   static const tableName = 'notes';
 
