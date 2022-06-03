@@ -7,7 +7,7 @@ class Note {
   Note(
       {this.id,
       this.title = "Note",
-      this.content = "Text",
+      this.content = "Put text here...",
       this.noteColor = 'red'});
 
   Map<String, dynamic> toMap() {
