@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_notes/app/screens/home/home_screen.dart';
 import 'package:flutter_notes/app_routes.dart';
+import 'package:flutter_notes/models/note_db.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
