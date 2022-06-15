@@ -1,20 +1,33 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_notes/app/screens/home/home_screen.dart';
+import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
+import 'package:flutter_notes/app/modules/note/bloc/note_events.dart';
+import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
 import 'package:flutter_notes/app_routes.dart';
-import 'package:flutter_notes/models/note_db.dart';
+import 'package:flutter_notes/core/di/locator.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key});
 
-  navigateToHome(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
-  }
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
 
+class _SplashScreenState extends State<SplashScreen> {
   navigateNamedToHome(context) {
     Navigator.pushNamedAndRemoveUntil(context, kHomeRoute, (_) => false);
+  }
+
+  final NoteBloc noteBloc = locator<NoteBloc>();
+
+  loadNotes() {
+    noteBloc.add(GetAllNotesEvent());
+  }
+
+  @override
+  void initState() {
+    loadNotes();
+    super.initState();
   }
 
   @override

@@ -1,8 +1,9 @@
+import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqlite_api.dart';
 
-import 'note.dart';
-
-class NotesDatabase {
+class NoteCacheProvider {
   static const _name = "NotesDatabase.db";
   static const _version = 2;
   late Database database;
@@ -33,8 +34,9 @@ class NotesDatabase {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<List<Map<String, dynamic>>> getAllNotes() async {
-    return await database.query(tableName);
+  Future<List<Note>> getAllNotes() async {
+    var result = await database.query(tableName);
+    return result.map((e) => Note.fromJson(e)).toList();
   }
 
   Future<Map<String, dynamic>?> getNotes(int id) async {
