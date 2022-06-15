@@ -5,7 +5,7 @@ abstract class NoteEvent extends Equatable {
   const NoteEvent();
 }
 
-//add image event
+//add note event
 class AddNoteEvent extends NoteEvent {
   final Note note;
 
@@ -15,7 +15,7 @@ class AddNoteEvent extends NoteEvent {
   List<Object> get props => [Note];
 }
 
-// remove image event
+// remove note event
 class RemoveNoteEvent extends NoteEvent {
   final int noteId;
 
@@ -25,7 +25,7 @@ class RemoveNoteEvent extends NoteEvent {
   List<Object> get props => [noteId];
 }
 
-//get all images event
+//get all notes event
 class GetAllNotesEvent extends NoteEvent {
   @override
   List<Object> get props => [];

@@ -13,7 +13,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
   final NoteRepository _noteRepository = NoteRepository();
 
-  // lier les states à l'evenement GetAllImagesEvent
+  // lier les states à l'evenement GetAllNotesEvent
   void _onGetAllNotes(GetAllNotesEvent event, Emitter<NoteState> emit) async {
     // state de loading va etre écouté par l'UI
     emit(NoteListLoadingState());
