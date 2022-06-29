@@ -1,12 +1,11 @@
 import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_events.dart';
-import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
 import 'package:flutter_notes/app_routes.dart';
 import 'package:flutter_notes/core/di/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   const SplashScreen({Key? key});
 
   @override

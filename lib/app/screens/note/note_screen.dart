@@ -51,7 +51,7 @@ class _NoteScreenState extends State<NoteScreen> {
                                 padding: const EdgeInsets.all(20.0),
                                 child: Text(
                                   note.title,
-                                  style: TextStyle(fontSize: 24),
+                                  style: const TextStyle(fontSize: 24),
                                 ),
                               ),
                             ),
@@ -61,7 +61,7 @@ class _NoteScreenState extends State<NoteScreen> {
               );
             }
             if (state is NoteListLoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is NoteListErrorState) {
               return Center(child: Text(state.error));

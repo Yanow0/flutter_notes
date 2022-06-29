@@ -1,7 +1,5 @@
 import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class NoteCacheProvider {
   static const _name = "NotesDatabase.db";

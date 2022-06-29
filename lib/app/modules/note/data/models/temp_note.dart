@@ -1,5 +1,3 @@
-import 'package:flutter_notes/theme/note_colors.dart';
-
 class Note {
   int? id;
   String title;
