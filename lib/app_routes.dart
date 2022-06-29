@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_notes/app/screens/note/note_screen.dart';
-import 'package:flutter_notes/app/screens/home/home_screen.dart';
 import 'package:flutter_notes/app/screens/splash/splash_screen.dart';
+
+import 'app/screens/home/home_screen.dart';
 
 const kMainRoute = '/';
 const kHomeRoute = '/home';
-const kHistoryRoute = '/History';
+const kNoteRoute = '/note';
 
 final Map<String, WidgetBuilder> kRoutes = {
   kMainRoute: (_) => const SplashScreen(),
   kHomeRoute: (_) => const HomeScreen(),
-  kHistoryRoute: (_) => const NoteScreen(),
+  kNoteRoute: (_) => const NoteScreen(),
 };
