@@ -4,6 +4,8 @@ import 'package:flutter_notes/app_routes.dart';
 import 'package:flutter_notes/core/di/locator.dart';
 import 'package:flutter/material.dart';
 
+import '../../modules/note/data/models/note_model.dart';
+
 class SplashScreen extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   const SplashScreen({Key? key});
@@ -21,11 +23,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   loadNotes() {
     noteBloc.add(GetAllNotesEvent());
+
+    Note note = Note(
+        id: 1,
+        title: 'Note 1',
+        content: 'This is the first note',
+        noteColor: '#ff0000',
+        imagePath: 'assets/images/note1.jpg');
+
+    noteBloc.add(AddNoteEvent(note: note));
   }
 
   @override
   void initState() {
-    //loadNotes();
+    loadNotes();
     super.initState();
   }
 

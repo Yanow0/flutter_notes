@@ -36,3 +36,13 @@ class NoteListErrorState extends NoteState {
   @override
   List<Object> get props => [error];
 }
+
+// noteList success state
+class NoteSuccessState extends NoteState {
+  final Note note;
+
+  const NoteSuccessState(this.note);
+
+  @override
+  List<Object> get props => [note];
+}

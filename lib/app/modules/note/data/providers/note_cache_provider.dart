@@ -18,23 +18,16 @@ class NoteCacheProvider {
                     imagePath TEXT
                     )''');
     });
-
-    Note note = new Note(
-        id: 1,
-        title: 'Note 1',
-        content: 'This is the first note',
-        noteColor: '#ff0000',
-        imagePath: 'assets/images/note1.jpg');
-
-    await insertNote(note);
   }
 
   Future<int> insertNote(Note note) async {
+    await initDatabase();
     return await database.insert(tableName, note.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<int> updateNote(Note note) async {
+    await initDatabase();
     return await database.update(tableName, note.toMap(),
         where: 'id = ?',
         whereArgs: [note.id],
@@ -42,11 +35,13 @@ class NoteCacheProvider {
   }
 
   Future<List<Note>> getAllNotes() async {
+    await initDatabase();
     var result = await database.query(tableName);
     return result.map((e) => Note.fromJson(e)).toList();
   }
 
   Future<Map<String, dynamic>?> getNotes(int id) async {
+    await initDatabase();
     var result =
         await database.query(tableName, where: 'id = ?', whereArgs: [id]);
 
@@ -58,6 +53,7 @@ class NoteCacheProvider {
   }
 
   Future<int> deleteNote(int id) async {
+    await initDatabase();
     return await database.delete(tableName, where: 'id = ?', whereArgs: [id]);
   }
 
