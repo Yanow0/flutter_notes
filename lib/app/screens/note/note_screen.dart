@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
+import 'package:flutter_notes/app/screens/home/home_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../modules/note/data/repository/note_repository.dart';
@@ -35,6 +36,16 @@ class _NoteScreenState extends State<NoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () async {
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HomeScreen(),
+                ));
+            setState(() {});
+          },
+        ),
         title: const Text('Ajouter une Note'),
       ),
       body: SingleChildScrollView(

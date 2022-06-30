@@ -17,18 +17,6 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushNamedAndRemoveUntil(context, kHomeRoute, (_) => false);
   }
 
-  final NoteBloc noteBloc = locator<NoteBloc>();
-
-  loadNotes() {
-    noteBloc.add(GetAllNotesEvent());
-  }
-
-  @override
-  void initState() {
-    loadNotes();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

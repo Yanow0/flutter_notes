@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
+import 'package:flutter_notes/app/modules/note/bloc/note_events.dart';
 import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
 import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
 import 'package:flutter_notes/app/screens/note/note_screen.dart';
+import 'package:flutter_notes/core/di/locator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,11 +18,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final NoteRepository _noteRepository = NoteRepository();
+  final NoteBloc noteBloc = locator<NoteBloc>();
+
+  loadNotes() {
+    noteBloc.add(GetAllNotesEvent());
+  }
+
+  @override
+  void initState() {
+    loadNotes();
+    super.initState();
+  }
 
   void deleteNote(int noteid, List<Note> listnotes) async {
     await _noteRepository.deleteNote(noteid);
     listnotes.removeWhere((note) => note.id == noteid);
     setState(() {});
+  }
+
+  void updateNotes(List<Note> listnotes) async {
+    final notes = await _noteRepository.getAllNotes();
+    setState(() {
+      listnotes = notes;
+    });
   }
 
   @override
