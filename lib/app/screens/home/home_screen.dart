@@ -80,6 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       .map((note) => ListTile(
                             title: Text(note.title),
                             subtitle: Text(note.content),
+                            onTap: () {
+                              // Navigator.pushNamed(context, '/note');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        NoteScreen(note: note),
+                                  ));
+                            },
                             trailing: IconButton(
                               icon: const Icon(Icons.delete),
                               onPressed: () {

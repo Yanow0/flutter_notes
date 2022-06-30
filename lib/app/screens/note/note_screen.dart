@@ -18,6 +18,15 @@ class NoteScreen extends StatefulWidget {
 
 class _NoteScreenState extends State<NoteScreen> {
   final NoteRepository _noteRepository = NoteRepository();
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    titleController.text = widget.note.title;
+    contentController.text = widget.note.content;
+  }
 
   // Allow you to open camera and take picture
   XFile? _image;
@@ -85,20 +94,22 @@ class _NoteScreenState extends State<NoteScreen> {
               ),
             ),
           TextField(
-            decoration: InputDecoration(
-                labelText: widget.note.title, border: InputBorder.none),
+            decoration: const InputDecoration(
+                labelText: "Titulo", border: InputBorder.none),
+            controller: titleController,
             onChanged: (text) {
-              widget.note.title = text;
+              widget.note.title = titleController.text.trim();
               _noteRepository.updateNote(widget.note);
             },
             maxLines: null,
             textCapitalization: TextCapitalization.sentences,
           ),
           TextField(
-            decoration: InputDecoration(
-                labelText: widget.note.content, border: InputBorder.none),
+            decoration: const InputDecoration(
+                labelText: "Conteno", border: InputBorder.none),
+            controller: contentController,
             onChanged: (text) {
-              widget.note.content = text;
+              widget.note.content = contentController.text.trim();
               _noteRepository.updateNote(widget.note);
             },
           ),
@@ -113,5 +124,12 @@ class _NoteScreenState extends State<NoteScreen> {
         child: const Icon(Icons.camera_alt),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    contentController.dispose();
+    super.dispose();
   }
 }
