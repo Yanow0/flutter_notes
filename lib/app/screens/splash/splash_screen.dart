@@ -1,5 +1,6 @@
 import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_events.dart';
+import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app_routes.dart';
 import 'package:flutter_notes/core/di/locator.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   final NoteBloc noteBloc = locator<NoteBloc>();
+  final NoteRepository _noteRepository = NoteRepository();
 
   loadNotes() {
-    noteBloc.add(GetAllNotesEvent());
-
     Note note = Note(
         id: 1,
         title: 'Note 1',
@@ -31,7 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
         noteColor: '#ff0000',
         imagePath: 'assets/images/note1.jpg');
 
-    noteBloc.add(AddNoteEvent(note: note));
+    _noteRepository.insertNote(note);
+
+    noteBloc.add(GetAllNotesEvent());
   }
 
   @override
