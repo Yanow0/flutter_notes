@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
+import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
 import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
 import 'package:flutter_notes/core/di/locator.dart';
@@ -16,7 +17,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final NoteRepository _noteRepository = NoteRepository();
+  final NoteRepository _noteRepository = NoteRepository();
+
+  deleteNote(int noteid) async {
+    await _noteRepository.deleteNote(noteid);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
           // Add button to add new note
           ElevatedButton(
               onPressed: () {
+                Note note = Note(
+                    title: 'Titre',
+                    content: 'Contenu',
+                    noteColor: '#ff0000',
+                    imagePath: 'assets/images/note1.jpg');
+
+                _noteRepository.insertNote(note);
+
                 Navigator.pushNamed(context, '/note');
               },
               child: const Text('Add note')),
@@ -45,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             trailing: IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () {
-                                // BlocProvider.of<NoteBloc>(context)
-                                //     .add(DeleteNoteEvent(note));
+                                deleteNote(note.id);
                               },
                             ),
                           ))

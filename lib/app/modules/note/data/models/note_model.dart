@@ -1,12 +1,16 @@
+import 'package:uuid/uuid.dart';
+
+// Create uuid object
+var uuid = Uuid();
+
 class Note {
   Note(
-      {required this.id,
-      required this.title,
+      {required this.title,
       required this.content,
       required this.noteColor,
       required this.imagePath});
 
-  final int id;
+  int id = uuid.v4().hashCode;
   final String title;
   final String content;
   final String noteColor;
@@ -14,7 +18,6 @@ class Note {
 
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
-      id: json['id'],
       title: json['title'],
       content: json['content'],
       noteColor: json['noteColor'],
