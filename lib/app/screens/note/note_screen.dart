@@ -24,7 +24,7 @@ class _NoteScreenState extends State<NoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ajout Note'),
+        title: const Text('Ajouter une Note'),
       ),
       body: ListView(children: [
         ElevatedButton(
@@ -32,6 +32,22 @@ class _NoteScreenState extends State<NoteScreen> {
               launchCamera();
             },
             child: const Text('Prendre une photo')),
+        TextField(
+          decoration: const InputDecoration(
+              labelText: 'Titre', border: InputBorder.none),
+          onChanged: (text) {
+            print('Title: $text');
+          },
+          maxLines: null,
+          textCapitalization: TextCapitalization.sentences,
+        ),
+        TextField(
+          decoration: const InputDecoration(
+              labelText: 'Contenu', border: InputBorder.none),
+          onChanged: (text) {
+            print('Content: $text');
+          },
+        ),
       ]),
     );
   }
