@@ -1,11 +1,8 @@
 import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_events.dart';
-import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app_routes.dart';
 import 'package:flutter_notes/core/di/locator.dart';
 import 'package:flutter/material.dart';
-
-import '../../modules/note/data/models/note_model.dart';
 
 class SplashScreen extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -21,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   final NoteBloc noteBloc = locator<NoteBloc>();
-  final NoteRepository _noteRepository = NoteRepository();
 
   loadNotes() {
     noteBloc.add(GetAllNotesEvent());

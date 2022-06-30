@@ -5,9 +5,6 @@ import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
 import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
 import 'package:flutter_notes/app/screens/note/note_screen.dart';
-import 'package:flutter_notes/core/di/locator.dart';
-
-import '../../modules/note/bloc/note_events.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,8 +17,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final NoteRepository _noteRepository = NoteRepository();
 
-  deleteNote(int noteid) async {
+  void deleteNote(int noteid, List<Note> listnotes) async {
     await _noteRepository.deleteNote(noteid);
+    listnotes.removeWhere((note) => note.id == noteid);
     setState(() {});
   }
 
@@ -63,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: Text(note.title),
                             subtitle: Text(note.content),
                             trailing: IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               onPressed: () {
-                                deleteNote(note.id);
+                                deleteNote(note.id, state.notes);
                               },
                             ),
                           ))

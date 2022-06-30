@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 // Create uuid object
-var uuid = Uuid();
+const uuid = Uuid();
 
 class Note {
   Note(
