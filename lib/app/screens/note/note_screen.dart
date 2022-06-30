@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../modules/note/data/repository/note_repository.dart';
+
 class NoteScreen extends StatefulWidget {
   final Note note;
   const NoteScreen({Key? key, required this.note}) : super(key: key);
@@ -14,6 +16,8 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
+  final NoteRepository _noteRepository = NoteRepository();
+
   // Allow you to open camera and take picture
   XFile? _image;
   void getImage(ImageSource imageSource) async {
@@ -73,7 +77,8 @@ class _NoteScreenState extends State<NoteScreen> {
             decoration: InputDecoration(
                 labelText: widget.note.title, border: InputBorder.none),
             onChanged: (text) {
-              print('Title: $text');
+              widget.note.title = text;
+              _noteRepository.updateNote(widget.note);
             },
             maxLines: null,
             textCapitalization: TextCapitalization.sentences,
@@ -82,7 +87,8 @@ class _NoteScreenState extends State<NoteScreen> {
             decoration: InputDecoration(
                 labelText: widget.note.content, border: InputBorder.none),
             onChanged: (text) {
-              print('Content: $text');
+              widget.note.content = text;
+              _noteRepository.updateNote(widget.note);
             },
           ),
         ]),

@@ -11,10 +11,10 @@ class Note {
       required this.imagePath});
 
   int id = uuid.v4().hashCode;
-  final String title;
-  final String content;
-  final String noteColor;
-  final String imagePath;
+  String title;
+  String content;
+  String noteColor;
+  String imagePath;
 
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
