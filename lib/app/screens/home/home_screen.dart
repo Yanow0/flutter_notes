@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text('Note'),
         ),
-        body: SafeArea(
+        body: SingleChildScrollView(
             child: ListView(shrinkWrap: true, children: [
           // Add button to add new note
           ElevatedButton(
