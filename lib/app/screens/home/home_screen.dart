@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Note'),
         ),
         body: SafeArea(
-            child: ListView(children: [
+            child: ListView(shrinkWrap: true, children: [
           // Add button to add new note
           ElevatedButton(
               onPressed: () {
@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, state) {
               if (state is NoteListSuccessState) {
                 return ListView(
+                  shrinkWrap: true,
                   children: state.notes
                       .map((note) => ListTile(
                             title: Text(note.title),
