@@ -96,6 +96,8 @@ class _NoteScreenState extends State<NoteScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           getImage(ImageSource.camera);
+          widget.note.imagePath = _image!.path;
+          _noteRepository.updateNote(widget.note);
         },
         child: const Icon(Icons.camera_alt),
       ),
