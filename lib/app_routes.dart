@@ -11,5 +11,5 @@ const kNoteRoute = '/note';
 final Map<String, WidgetBuilder> kRoutes = {
   kMainRoute: (_) => const SplashScreen(),
   kHomeRoute: (_) => const HomeScreen(),
-  kNoteRoute: (_) => const NoteScreen(),
+  // kNoteRoute: (_) => const NoteScreen(),
 };

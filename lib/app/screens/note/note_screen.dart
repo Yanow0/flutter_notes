@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class NoteScreen extends StatefulWidget {
-  const NoteScreen({Key? key}) : super(key: key);
+  final Note note;
+  const NoteScreen({Key? key, required this.note}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -33,8 +35,8 @@ class _NoteScreenState extends State<NoteScreen> {
             },
             child: const Text('Prendre une photo')),
         TextField(
-          decoration: const InputDecoration(
-              labelText: 'Titre', border: InputBorder.none),
+          decoration: InputDecoration(
+              labelText: widget.note.title, border: InputBorder.none),
           onChanged: (text) {
             print('Title: $text');
           },
@@ -42,8 +44,8 @@ class _NoteScreenState extends State<NoteScreen> {
           textCapitalization: TextCapitalization.sentences,
         ),
         TextField(
-          decoration: const InputDecoration(
-              labelText: 'Contenu', border: InputBorder.none),
+          decoration: InputDecoration(
+              labelText: widget.note.content, border: InputBorder.none),
           onChanged: (text) {
             print('Content: $text');
           },

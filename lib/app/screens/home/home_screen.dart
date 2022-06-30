@@ -4,6 +4,7 @@ import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
 import 'package:flutter_notes/app/modules/note/data/models/note_model.dart';
 import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
+import 'package:flutter_notes/app/screens/note/note_screen.dart';
 import 'package:flutter_notes/core/di/locator.dart';
 
 import '../../modules/note/bloc/note_events.dart';
@@ -36,14 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ElevatedButton(
               onPressed: () {
                 Note note = Note(
-                    title: 'Titre',
-                    content: 'Contenu',
+                    title: 'Titulo',
+                    content: 'Conteno',
                     noteColor: '#ff0000',
                     imagePath: 'assets/images/note1.jpg');
 
                 _noteRepository.insertNote(note);
 
-                Navigator.pushNamed(context, '/note');
+                // Navigator.pushNamed(context, '/note');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NoteScreen(note: note),
+                    ));
               },
               child: const Text('Add note')),
           BlocBuilder<NoteBloc, NoteState>(
