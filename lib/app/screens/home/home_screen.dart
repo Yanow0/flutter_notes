@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_bloc.dart';
+import 'package:flutter_notes/app/modules/note/data/repository/note_repository.dart';
 import 'package:flutter_notes/app/modules/note/bloc/note_states.dart';
 import 'package:flutter_notes/core/di/locator.dart';
 
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  NoteBloc noteBloc = locator<NoteBloc>();
+  // final NoteRepository _noteRepository = NoteRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -31,50 +32,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, '/note');
               },
               child: const Text('Add note')),
-          // BlocBuilder<NoteBloc, NoteState>(
-          //   buildWhen: (previous, current) => previous is NoteListLoadingState,
-          //   builder: (context, state) {
-          //     if (state is NoteListSuccessState) {
-          //       return ListView(
-          //         children: state.notes
-          //             .map((note) => InkWell(
-          //                   onTap: () {
-          //                     noteBloc.add(GetAllNotesEvent());
-          //                   },
-          //                   child: Padding(
-          //                     padding: const EdgeInsets.all(8.0),
-          //                     child: Card(
-          //                       elevation: 2,
-          //                       child: Padding(
-          //                         padding: const EdgeInsets.all(20.0),
-          //                         child: Text(
-          //                           note.title,
-          //                           style: const TextStyle(fontSize: 24),
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ))
-          //             .toList(),
-          //       );
-          //     }
-          //     if (state is NoteListLoadingState) {
-          //       return const Center(child: CircularProgressIndicator());
-          //     }
-          //     if (state is NoteListErrorState) {
-          //       return Center(child: Text(state.error));
-          //     }
-          //     return ListView(children: [
-          //       // Add button to add new note
-          //       ElevatedButton(
-          //         onPressed: () {
-          //           Navigator.pushNamed(context, '/note');
-          //         },
-          //         child: const Text('Add note'),
-          //       ),
-          //     ]);
-          //   },
-          // ),
+          BlocBuilder<NoteBloc, NoteState>(
+            buildWhen: (previous, current) => previous is NoteListLoadingState,
+            builder: (context, state) {
+              if (state is NoteListSuccessState) {
+                return ListView(
+                  children: state.notes
+                      .map((note) => ListTile(
+                            title: Text(note.title),
+                            subtitle: Text(note.content),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                // BlocProvider.of<NoteBloc>(context)
+                                //     .add(DeleteNoteEvent(note));
+                              },
+                            ),
+                          ))
+                      .toList(),
+                );
+              }
+              if (state is NoteListLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is NoteListErrorState) {
+                return Center(child: Text(state.error));
+              }
+              return Container();
+            },
+          ),
         ])));
   }
 }

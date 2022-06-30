@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: kRoutes,
         builder: (_, widget) {
-          //donner acces à tous les écran de l'app au FactureBloc
           return MultiBlocProvider(providers: [
             BlocProvider<NoteBloc>(
               create: (_) => noteBloc,

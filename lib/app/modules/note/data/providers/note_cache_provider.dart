@@ -18,6 +18,15 @@ class NoteCacheProvider {
                     imagePath TEXT
                     )''');
     });
+
+    Note note = new Note(
+        id: 1,
+        title: 'Note 1',
+        content: 'This is the first note',
+        noteColor: '#ff0000',
+        imagePath: 'assets/images/note1.jpg');
+
+    await insertNote(note);
   }
 
   Future<int> insertNote(Note note) async {
