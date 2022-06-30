@@ -29,7 +29,7 @@ class NoteCacheProvider {
   Future<int> updateNote(Note note) async {
     await initDatabase();
     return await database.update(tableName, note.toMap(),
-        where: 'id = ?',
+        where: "id = ?",
         whereArgs: [note.id],
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
@@ -43,7 +43,7 @@ class NoteCacheProvider {
   Future<Map<String, dynamic>?> getNotes(int id) async {
     await initDatabase();
     var result =
-        await database.query(tableName, where: 'id = ?', whereArgs: [id]);
+        await database.query(tableName, where: "id = ?", whereArgs: [id]);
 
     if (result.isNotEmpty) {
       return result.first;
@@ -54,7 +54,9 @@ class NoteCacheProvider {
 
   Future<int> deleteNote(int id) async {
     await initDatabase();
-    return await database.delete(tableName, where: 'id = ?', whereArgs: [id]);
+    return await database.delete(tableName, where: "id = ?", whereArgs: [id]);
+    print("id: $id");
+    // return await database.rawDelete('DELETE FROM $tableName WHERE id = ?', [id]);
   }
 
   closeDatabase() async {
